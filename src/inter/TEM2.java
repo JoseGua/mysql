@@ -5,6 +5,10 @@
  */
 package inter;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author JOSE MENDOZA
@@ -63,6 +67,11 @@ public class TEM2 extends javax.swing.JFrame {
         });
 
         jButton2.setText("SAVE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,6 +144,22 @@ public class TEM2 extends javax.swing.JFrame {
         this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Connection conexion;
+            try {
+                conexion=conexionn.obtener();
+                PreparedStatement ps = null;
+                String temp=jTextField1.getText();
+                ps = conexion.prepareStatement("Insert into temporada(nombre_temporada) values('"+temp+"')");
+                ps.execute();
+                jTextField1.setText("");
+                 JOptionPane.showMessageDialog(null, "Equipo insertado correctamente");
+            } 
+            catch(Exception e){
+            System.out.println(e);}
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
